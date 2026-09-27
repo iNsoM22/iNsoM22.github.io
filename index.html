@@ -52,7 +52,7 @@
       <article class="project"><div><div class="project-top"><span class="project-type">Personal · Computer vision</span><span class="project-number">05</span></div><h3>DentAI<br>Dental X-ray Segmentation</h3><p>Trained a custom YOLOv5 segmentation model for dental anomaly detection, reaching a 70% F1 score. Built a responsive React app backed by a concurrent FastAPI inference service.</p></div><div><div class="tags"><span class="tag">YOLOv5</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">React</span></div><div class="project-links"><a class="project-link" href="https://github.com/iNsoM22/Dental-XRay-Segmentation" target="_blank" rel="noreferrer">View source on GitHub <span>↗ </span></a></div></div></article>
     </div></section>
     <section class="section wrap" aria-labelledby="focus-title"><div class="section-heading"><div><span class="section-kicker">What I work on</span><h2 id="focus-title">From model logic to<br><em>production systems.</em></h2></div><p>I like working across the stack where product needs, data, and infrastructure meet.</p></div><div class="focus-grid"><article class="focus-card"><span class="num">01</span><h3>Agentic AI &amp; retrieval</h3><p>RAG, hybrid search, multi-agent workflows, evaluation, prompt engineering, and LLM observability.</p></article><article class="focus-card"><span class="num">02</span><h3>Backend &amp; platform engineering</h3><p>Fast APIs, data modeling, secure multi-tenancy, integrations, audit trails, and CI/CD.</p></article><article class="focus-card"><span class="num">03</span><h3>Applied machine learning</h3><p>Computer vision, model training, data pipelines, and practical AI features for real workflows.</p></article></div></section>
-    <section class="section wrap" id="experience" aria-labelledby="experience-title"><div class="section-heading"><div><span class="section-kicker">Where I’ve made an impact</span><h2 id="experience-title">Experience.</h2></div><p>Building and shipping software with teams in product, SaaS, and applied research.</p></div>
+    <section class="section wrap" id="experience" aria-labelledby="experience-title"><div class="section-heading"><div><span class="section-kicker">Where I’ve made an impact</span><h2 id="experience-title">Experience.</h2></div><p><strong id="industry-duration">1+ years</strong> of industry experience across software engineering, full-stack product work, and applied AI.</p></div>
       <article class="experience"><div><h3>Jr. Software Developer</h3><div class="meta">KNYSYS · Karachi<br>Dec 2025 to Present</div></div><ul><li>Led architecture and development of a UN satellite operator management system, improving deployment cycles with GitHub Actions CI/CD and securing machine-to-machine access with X-API key management.</li><li>Designed a configurable risk analysis and audit trail system covering 90% of declaration types, with automated alerts, traceability, audit logging, and accuracy feedback.</li><li>Built configurable Prefect audit workflows with dynamic assignments and escalation; integrated Textract, VoyageAI, Anthropic, LangGraph, LangSmith, and Sentry. Also supported a multi-tenant telehealth SaaS product and payment/support integrations.</li></ul></article>
       <article class="experience"><div><h3>Full Stack Developer</h3><div class="meta">InfraNext SMC-Pvt. Ltd. · Karachi<br>Aug 2025 to Oct 2025</div></div><ul><li>Reduced average API response time from 450 ms to under 200 ms by restructuring SQL joins and relationships and introducing caching.</li><li>Engineered audit logging and integrated Stripe and Shopify through REST and GraphQL pipelines for multi-tenant onboarding, billing, and order synchronization.</li></ul></article>
       <article class="experience"><div><h3>AI Intern</h3><div class="meta">NCAI Smart City Lab, NEDUET · Karachi<br>Jun 2024 to Nov 2024</div></div><ul><li>Trained computer vision models for drowsiness, focus, and road segmentation; collected 10,000+ road-sign images and integrated YOLO-based speed and distance estimation for autonomous vehicle systems.</li><li>Built a NoSQL-to-SQL soil-data pipeline and a dashboard for 12-month historical analysis, with sub-three-second queries.</li></ul></article>
@@ -75,6 +75,27 @@
     setTheme(button.dataset.themeChoice);
     try { localStorage.setItem("portfolio-theme", button.dataset.themeChoice); } catch {}
   }));
+
+  const experienceRanges = [
+    ["2024-06", "2024-12"],
+    ["2025-08", "2025-11"],
+    ["2025-12", null]
+  ];
+  const monthIndex = (date) => {
+    const [year, month] = date.split("-").map(Number);
+    return year * 12 + month - 1;
+  };
+  const today = new Date();
+  const currentMonthExclusive = today.getFullYear() * 12 + today.getMonth() + 1;
+  const totalMonths = experienceRanges.reduce((total, [start, end]) => {
+    const endMonth = end ? monthIndex(end) : currentMonthExclusive;
+    return total + Math.max(0, endMonth - monthIndex(start));
+  }, 0);
+  const years = Math.floor((totalMonths / 12) * 10) / 10;
+  const formattedYears = Number.isInteger(years) ? years : years.toFixed(1);
+  document.getElementById("industry-duration").textContent = totalMonths >= 12
+    ? `${formattedYears}+ years`
+    : `${totalMonths} months`;
 </script>
 </body>
 </html>
